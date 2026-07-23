@@ -1,6 +1,10 @@
 {
-  "previewOrg": "aemysites",
-  "previewSite": "arumsey-excat-da",
   "type": "da",
-  "contentHostUrl": "https://content.da.live/aemysites/arumsey-excat-da/"
+  "sites": {
+    "arumsey-excat-da": {
+      "previewOrg": "aemysites",
+      "previewSite": "arumsey-excat-da",
+      "contentHostUrl": "https://content.da.live/aemysites/arumsey-excat-da/"
+    }
+  }
 }
