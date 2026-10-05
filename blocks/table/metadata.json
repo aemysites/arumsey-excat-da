@@ -1,0 +1,27 @@
+{
+  "variantName": "table",
+  "baseBlock": "table",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "dense",
+    "hasBackgroundImage": false,
+    "hasGrid": true,
+    "imagePattern": "noimg",
+    "structure": "header row + 2-column data rows"
+  },
+  "contentPattern": "Data table inside long-form legal text: a header row followed by data rows, one block row per table row and one cell per column (e.g. Privacy Statement 'Category of Personal Information Disclosed | Category of Third-Party Recipient'). Source pages ship a desktop table plus a duplicated, transposed mobile table; only the desktop table is authored.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/private/privacystatement.html",
+      "https://www.sparkdriverapp.com/es_us/private/privacystatement.html"
+    ],
+    "reuseCount": 2
+  },
+  "options": [
+    { "class": "no-header", "label": "No header" },
+    { "class": "striped", "label": "Striped" },
+    { "class": "bordered", "label": "Bordered" }
+  ],
+  "memberVariantIds": []
+}

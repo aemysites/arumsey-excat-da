@@ -1,0 +1,27 @@
+{
+  "variantName": "accordion",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "text + list"
+  },
+  "contentPattern": "FAQ accordion: a single bordered, rounded box holding a vertical list of collapsible Q&A items separated by thin dividers. Each item shows a bold question on the left with a chevron on the right; clicking expands the rich-text answer below it. Authored as one row per item: question | answer.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/faqs.html",
+      "https://www.sparkdriverapp.com/en_us/faqs/FAQs-Test.html",
+      "https://www.sparkdriverapp.com/es_us/faqs.html",
+      "https://www.sparkdriverapp.com/es_us/faqs/FAQs-Test.html"
+    ],
+    "reuseCount": 4
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_20324216e3be"
+  ]
+}

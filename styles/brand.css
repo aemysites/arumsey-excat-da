@@ -1,0 +1,15 @@
+/* brand tokens extracted from www.sparkdriverapp.com (migration-work/brand.json) */
+:root {
+  --heading-font-family: rubik, rubik-fallback, arial, helvetica, sans-serif;
+  --body-font-family: rubik, rubik-fallback, arial, helvetica, sans-serif;
+  --background-color: #fff;
+  --text-color: #3b4459;
+  --link-color: #3b4459;
+  --link-hover-color: #3b4459;
+  --light-color: #f0f5ff;
+  --dark-color: #2e2f32;
+  --brand-blue: #0053e2;
+  --brand-navy: #0c3c92;
+  --section-padding: 48px;
+  --content-max-width: 1200px;
+}

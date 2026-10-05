@@ -1,0 +1,140 @@
+/*
+ * Accordion - "View full benefits & terms" style (sparkdriverapp accordion-style1-2)
+ * Values from migration-work/accordion-extracted.css (source computed styles)
+ */
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+
+  /* source divider component that precedes every accordion */
+  border-top: 1px solid rgb(51 51 51);
+  padding-top: 10px;
+}
+
+.accordion .accordion-item {
+  background-color: var(--background-color);
+}
+
+/* title row (source a.item-title-2) */
+.accordion .accordion-item-label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 16px;
+  color: rgb(51 51 51);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24.84px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion .accordion-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item-label:hover,
+.accordion .accordion-item[open] > .accordion-item-label {
+  background-color: rgb(230 242 250);
+}
+
+/* inner frame (source div.buttonClass) */
+.accordion .accordion-item-label-inner {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 1px 0;
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
+
+/* label text (source .item-header-text-2) */
+.accordion .accordion-item-label-text {
+  display: flex;
+  align-items: center;
+  padding: 0 15px 0 0;
+  text-align: left;
+}
+
+.accordion .accordion-item-label:hover .accordion-item-label-inner,
+.accordion .accordion-item[open] > .accordion-item-label .accordion-item-label-inner {
+  color: var(--brand-blue);
+}
+
+/* leading icon (source span.card-icon-2, walmartnewicons modal glyph) */
+.accordion .accordion-item-label-text::before {
+  content: '';
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 18px;
+  margin: 0 6px 0 0;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='M8 2.75H2.75v12.5h12.5V10'/%3E%3Cpath d='M10.5 2.75h4.75V7.5M15.25 2.75 8.5 9.5'/%3E%3C/svg%3E") center / 16px 16px no-repeat;
+}
+
+/* trailing chevron (source span.chevron::after, 14px glyph pinned right) */
+.accordion .accordion-item-label-inner::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-7px);
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 5 7 9.5 11.5 5'/%3E%3C/svg%3E") center / 14px 14px no-repeat;
+}
+
+.accordion .accordion-item[open] > .accordion-item-label .accordion-item-label-inner::after {
+  transform: translateY(-7px) rotate(180deg);
+}
+
+/* panel (source div.item-content-2 > .rte-styles) */
+.accordion .accordion-item-body {
+  margin: 10px 0 0;
+  padding: 0 22.8px 45px; /* 15px panel padding + 30px rte margin */
+  color: rgb(51 51 51);
+  font-size: 18px;
+  line-height: 25.02px;
+}
+
+.accordion .accordion-item-body p {
+  margin: 0;
+  padding: 0 20px;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+}
+
+/* source separates the two paragraphs with a trailing <br> (one 27px line) */
+.accordion .accordion-item-body p + p {
+  margin-top: 27px;
+}
+
+.accordion .accordion-item-body a:any-link {
+  color: rgb(0 108 206);
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.accordion .accordion-item-body sup {
+  position: relative;
+  top: -6.75px;
+  font-size: 13.5px;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+@media (width >= 900px) {
+  .accordion .accordion-item-label {
+    padding: 16px 24px;
+  }
+
+  .accordion .accordion-item-body {
+    padding: 0 30px 65px; /* 15px panel padding + 50px rte margin */
+  }
+}

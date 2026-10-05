@@ -1,0 +1,102 @@
+/*
+ * CTA block
+ * Values extracted from the source closing CTA (sparkdriverapp.com en_us.html,
+ * blog fragment "Be your own boss!") and the outlined "Learn more" secondary
+ * button (offers.html). See migration-work/cta-extracted.css.
+ */
+.cta {
+  color: var(--text-color);
+}
+
+.cta .cta-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta .cta-heading {
+  margin: 20px 0 10px;
+  color: var(--text-color);
+}
+
+.cta .cta-text {
+  margin: 0;
+  font-size: 22px;
+  line-height: 33px;
+  color: var(--text-color);
+}
+
+.cta .cta-actions {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 30px 0 8px;
+}
+
+.cta .cta-actions .button-container {
+  margin: 0;
+}
+
+/* primary pill: 48px tall, 12px 24px, no border, regular-weight uppercase label */
+main .cta a.button:any-link {
+  min-width: 153px;
+  margin: 0;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: var(--brand-blue);
+  color: #fff;
+}
+
+main .cta a.button:hover,
+main .cta a.button:focus {
+  background-color: var(--brand-blue);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* secondary option: lone centered outlined pill (e.g. "Learn more").
+   Source gap above is 16px, already supplied by the preceding paragraph's margin. */
+.cta.secondary .cta-actions {
+  margin: 0 0 8px;
+}
+
+.cta.secondary .cta-heading + .cta-actions,
+.cta.secondary .cta-text + .cta-actions {
+  margin-top: 30px;
+}
+
+main .cta a.button.secondary:any-link {
+  min-width: 103px;
+  padding: 11px 44px;
+  border: 1px solid var(--dark-color);
+  font-size: 14px;
+  line-height: 20px;
+  background-color: #fff;
+  color: var(--brand-navy);
+}
+
+main .cta a.button.secondary:hover,
+main .cta a.button.secondary:focus {
+  background-color: #fff;
+  color: var(--brand-navy);
+  box-shadow: inset 0 0 0 1px var(--dark-color);
+  text-decoration: none;
+}
+
+@media (width >= 600px) {
+  .cta .cta-actions {
+    flex-direction: row;
+  }
+}

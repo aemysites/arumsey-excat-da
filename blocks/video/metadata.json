@@ -1,0 +1,29 @@
+{
+  "variantName": "video",
+  "baseBlock": "video",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "content"
+  },
+  "contentPattern": "A single embedded video referenced by a link (YouTube, Vimeo, or a direct video file), rendered at 16:9. A direct video file with no poster plays muted, looped and inline with a Mute/Unmute toggle overlaid top-center; an optional poster image turns it into click-to-play with a centered play button; YouTube/Vimeo links embed a player with controls. Optional heading + text authored in another cell renders beside the video (text left, video right) on desktop and stacked on mobile.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/rewards.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewards1.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewardstest01.html",
+      "https://www.sparkdriverapp.com/en_us/blog/welcome.html",
+      "https://www.sparkdriverapp.com/en_us/holiday-seasonal-gig-opportunities.html"
+    ],
+    "reuseCount": 5
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_2f15ea833463",
+    "v_7099d815d2de"
+  ]
+}

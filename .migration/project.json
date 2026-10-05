@@ -6,5 +6,8 @@
       "previewSite": "arumsey-excat-da",
       "contentHostUrl": "https://content.da.live/aemysites/arumsey-excat-da/"
     }
-  }
+  },
+  "features": [
+    "site-planning"
+  ]
 }

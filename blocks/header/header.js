@@ -1,106 +1,172 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+// media query match that indicates desktop width
+const isDesktop = window.matchMedia('(width >= 1200px)');
 
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
-    }
-  }
-}
+// locales that have their own nav document (/<locale>/nav); the first is the site default
+const LOCALES = ['en-us', 'es-us'];
 
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
-    }
-  }
-}
-
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-  }
-}
-
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
+/**
+ * Returns the locale of the current page from its path (/en-us/..., /content/es-us/...).
+ * @returns {string|null}
+ */
+function getPageLocale() {
+  const segments = window.location.pathname.split('/').filter(Boolean);
+  if (segments[0] === 'content') segments.shift();
+  const first = (segments[0] || '').replace(/\.html$/, '');
+  return LOCALES.includes(first) ? first : null;
 }
 
 /**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
+ * Fetches the nav document: the locale nav first, then the site-wide nav.
+ * Localhost (aem up) serves documents under /content, DA/EDS at the site root.
+ * @returns {Promise<{html: string, url: string}|null>}
  */
-function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
+async function fetchNav() {
+  const locale = getPageLocale();
+  if (locale && locale !== LOCALES[0]) {
+    let localeResp = await fetch(`/content/${locale}/nav.plain.html`);
+    if (!localeResp.ok) localeResp = await fetch(`/${locale}/nav.plain.html`);
+    if (localeResp.ok) return { html: await localeResp.text(), url: localeResp.url };
+  }
+  // metadata-independent: /content first (localhost), then root (DA/EDS prod)
+  let resp = await fetch('/content/nav.plain.html');
+  if (!resp.ok) resp = await fetch('/nav.plain.html');
+  if (!resp.ok) return null;
+  return { html: await resp.text(), url: resp.url };
+}
+
+/**
+ * Resolves relative image paths against the nav document URL so they work
+ * at every page depth.
+ * @param {Element} root
+ * @param {string} baseUrl
+ */
+function resolveImages(root, baseUrl) {
+  root.querySelectorAll('img[src]').forEach((img) => {
+    img.src = new URL(img.getAttribute('src'), baseUrl).href;
+    img.loading = 'eager';
   });
 }
 
 /**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
+ * Returns the current page path translated to the locale of a locale link.
+ * @param {string} href The locale link from the nav (e.g. /es-us)
+ * @returns {string}
  */
-function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.nav-hamburger button');
-  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
-  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  const navDrops = navSections.querySelectorAll('.nav-drop');
-  if (isDesktop.matches) {
-    navDrops.forEach((drop) => {
-      if (!drop.hasAttribute('tabindex')) {
-        drop.setAttribute('tabindex', 0);
-        drop.addEventListener('focus', focusNavSection);
-      }
-    });
-  } else {
-    navDrops.forEach((drop) => {
-      drop.removeAttribute('tabindex');
-      drop.removeEventListener('focus', focusNavSection);
-    });
-  }
+function localizeHref(href) {
+  const targetLocale = new URL(href, window.location).pathname.split('/').filter(Boolean)[0];
+  const current = getPageLocale();
+  if (!current || !LOCALES.includes(targetLocale)) return href;
+  const path = window.location.pathname.replace(/^\/content/, '').replace(/\.html$/, '');
+  return path.replace(new RegExp(`^/${current}`), `/${targetLocale}`);
+}
 
-  // enable menu collapse on escape keypress
-  if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
-  } else {
-    window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
-  }
+/**
+ * Opens or closes one dropdown (state lives on its trigger button).
+ * @param {Element} drop The dropdown list item
+ * @param {boolean} expanded
+ */
+function setExpanded(drop, expanded) {
+  drop.querySelector(':scope > .nav-drop-trigger').setAttribute('aria-expanded', expanded ? 'true' : 'false');
+}
+
+/**
+ * @param {Element} drop The dropdown list item
+ * @returns {boolean}
+ */
+function isExpanded(drop) {
+  return drop.querySelector(':scope > .nav-drop-trigger').getAttribute('aria-expanded') === 'true';
+}
+
+/**
+ * Closes every open dropdown inside the nav, except an optional one.
+ * @param {Element} nav
+ * @param {Element} [except]
+ */
+function closeDropdowns(nav, except) {
+  nav.querySelectorAll('.nav-drop').forEach((drop) => {
+    if (drop !== except && isExpanded(drop)) setExpanded(drop, false);
+  });
+}
+
+/**
+ * Turns a list item with a nested list into a dropdown with a trigger button.
+ * Desktop: opens on hover, click toggles. Mobile: click toggles (accordion).
+ * @param {Element} li
+ * @param {Element} nav
+ */
+function decorateDropdown(li, nav) {
+  const submenu = li.querySelector(':scope > ul');
+  li.classList.add('nav-drop');
+  submenu.classList.add('nav-drop-list');
+
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'nav-drop-trigger';
+  trigger.setAttribute('aria-expanded', 'false');
+  [...li.childNodes].forEach((node) => {
+    if (node === submenu) return;
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent.trim();
+      if (text) trigger.append(text);
+      node.remove();
+    } else {
+      trigger.append(node);
+    }
+  });
+  const chevron = document.createElement('span');
+  chevron.className = 'icon icon-chevron-down nav-drop-chevron';
+  trigger.append(chevron);
+  li.prepend(trigger);
+
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    // desktop: one dropdown at a time; mobile accordion: sections expand independently
+    if (isDesktop.matches) closeDropdowns(nav, li);
+    setExpanded(li, !isExpanded(li));
+  });
+  li.addEventListener('mouseenter', () => {
+    if (!isDesktop.matches) return;
+    closeDropdowns(nav, li);
+    setExpanded(li, true);
+  });
+  li.addEventListener('mouseleave', () => {
+    if (isDesktop.matches) setExpanded(li, false);
+  });
+}
+
+/**
+ * Marks the current locale and points locale links at the same page in that locale.
+ * @param {Element} localeList
+ */
+function decorateLocales(localeList) {
+  const current = getPageLocale() || LOCALES[0];
+  localeList.querySelectorAll(':scope > li > ul a[href]').forEach((a) => {
+    const locale = new URL(a.href, window.location).pathname.split('/').filter(Boolean)[0];
+    a.href = localizeHref(a.getAttribute('href'));
+    if (locale === current) {
+      a.setAttribute('aria-current', 'true');
+      const check = document.createElement('span');
+      check.className = 'icon icon-check nav-locale-check';
+      a.append(check);
+    }
+  });
+}
+
+/**
+ * Opens or closes the mobile menu.
+ * @param {Element} nav
+ * @param {boolean} [force] true to open, false to close
+ */
+function toggleMenu(nav, force) {
+  const open = force !== undefined ? force : nav.getAttribute('aria-expanded') !== 'true';
+  const button = nav.querySelector('.nav-hamburger button');
+  nav.setAttribute('aria-expanded', open ? 'true' : 'false');
+  button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  document.body.style.overflowY = (open && !isDesktop.matches) ? 'hidden' : '';
+  if (!open) closeDropdowns(nav);
 }
 
 /**
@@ -108,56 +174,83 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  const navDoc = await fetchNav();
+  if (!navDoc) return;
+  const fragment = document.createElement('div');
+  fragment.innerHTML = navDoc.html;
+  resolveImages(fragment, navDoc.url);
 
-  // decorate nav DOM
+  const [brandSection, sectionsSection, toolsSection] = fragment.querySelectorAll(':scope > div');
+
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  nav.setAttribute('aria-expanded', 'false');
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
+  // brand
+  const brand = document.createElement('div');
+  brand.className = 'nav-brand';
+  if (brandSection) brand.append(...brandSection.childNodes);
+
+  // panel: main links + locale selector (slide-in drawer on mobile)
+  const panel = document.createElement('div');
+  panel.className = 'nav-panel';
+  panel.id = 'nav-panel';
+  const sections = document.createElement('div');
+  sections.className = 'nav-sections';
+  if (sectionsSection) sections.append(...sectionsSection.childNodes);
+  panel.append(sections);
+
+  // tools: the locale list goes into the panel, the CTA stays in the bar
+  const cta = document.createElement('div');
+  cta.className = 'nav-cta';
+  if (toolsSection) {
+    const localeList = toolsSection.querySelector('ul');
+    if (localeList) {
+      const locale = document.createElement('div');
+      locale.className = 'nav-locale';
+      locale.append(localeList);
+      decorateLocales(localeList);
+      panel.append(locale);
+    }
+    const ctaLink = toolsSection.querySelector('a');
+    if (ctaLink) {
+      ctaLink.className = 'button nav-cta-button';
+      cta.append(ctaLink);
+    }
+  }
+
+  // Document Authoring wraps list item text in <p>: unwrap so labels and links
+  // sit directly in the <li>, the same as the plain nav document
+  panel.querySelectorAll('li > p').forEach((p) => p.replaceWith(...p.childNodes));
+
+  panel.querySelectorAll('li').forEach((li) => {
+    if (li.querySelector(':scope > ul')) decorateDropdown(li, nav);
   });
-
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
-  }
-
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
-    });
-  }
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
-  hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
+  hamburger.className = 'nav-hamburger';
+  hamburger.innerHTML = `<button type="button" aria-controls="nav-panel" aria-expanded="false" aria-label="Open navigation">
+      <span class="nav-hamburger-line"></span><span class="nav-hamburger-line"></span><span class="nav-hamburger-line"></span>
     </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
-  nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  hamburger.querySelector('button').addEventListener('click', () => toggleMenu(nav));
+
+  nav.append(brand, panel, cta, hamburger);
+  decorateIcons(nav);
+
+  // close dropdowns on outside click; escape closes dropdowns and the mobile menu
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target)) closeDropdowns(nav);
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.code !== 'Escape') return;
+    closeDropdowns(nav);
+    if (!isDesktop.matches && nav.getAttribute('aria-expanded') === 'true') toggleMenu(nav, false);
+  });
+
+  // reset menu state when crossing the desktop breakpoint
+  isDesktop.addEventListener('change', () => toggleMenu(nav, false));
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

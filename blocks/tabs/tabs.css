@@ -1,0 +1,337 @@
+/* Tabs block - values extracted from sparkdriverapp.com FAQ (div.tabs-3-0),
+   see migration-work/tabs-extracted.css */
+
+/* the six-tab bar (~1270px) is wider than the 1200px content column; the source
+   container is 1315px wide */
+main > .section > .tabs-wrapper {
+  max-width: 1315px;
+}
+
+.tabs {
+  color: var(--text-color);
+}
+
+/* ---------- tab list ---------- */
+
+/* mobile: tabs wrap three per row */
+.tabs .tabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.tabs .tabs-tab {
+  display: flex;
+  flex: 0 0 calc(100% / 3);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0 3px 20px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: normal;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  white-space: normal;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.tabs .tabs-tab:hover,
+.tabs .tabs-tab:focus {
+  background: none;
+  color: #000;
+  text-decoration: none;
+}
+
+.tabs .tabs-tab:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: -2px;
+}
+
+.tabs .tabs-tab[aria-selected='true'] {
+  color: #3171ff;
+  font-weight: 500;
+  cursor: default;
+}
+
+.tabs .tabs-tab-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 0 8px;
+  overflow: hidden;
+}
+
+.tabs .tabs-tab-image picture,
+.tabs .tabs-tab-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* the active bar is drawn on the label; hidden on mobile (as on the source) */
+.tabs .tabs-tab-label {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 0 5px;
+  border-bottom: 5px solid transparent;
+}
+
+/* ---------- panels ---------- */
+.tabs .tabs-panel {
+  margin-top: 37px;
+}
+
+.tabs .tabs-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs .tabs-items {
+  box-sizing: border-box;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #d7d7d7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ---------- collapsible Q&A items ---------- */
+.tabs .tabs-item {
+  /* divider below each item, inset like the source (not on the last one) */
+  padding-bottom: 1px;
+  background: linear-gradient(#d7d7d7, #d7d7d7) bottom center / calc(100% - 32px) 1px no-repeat;
+}
+
+.tabs .tabs-item:last-child {
+  padding-bottom: 0;
+  background: none;
+}
+
+.tabs .tabs-item[hidden] {
+  display: none;
+}
+
+.tabs .tabs-item-label {
+  position: relative;
+  display: block;
+  padding: 44px 41px 44px 18px;
+  color: #333;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24.84px;
+  list-style: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabs .tabs-item-label::-webkit-details-marker {
+  display: none;
+}
+
+/* focus ring sits on the inner box (inset 25px + 16px / 16px), radius 5px */
+.tabs .tabs-item-label::before {
+  content: '';
+  position: absolute;
+  inset: 41px 16px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+.tabs .tabs-item-label:focus {
+  outline: none;
+}
+
+.tabs .tabs-item-label:focus-visible::before {
+  border-color: var(--brand-blue);
+}
+
+/* chevron (source uses a 14px icon-font glyph) */
+.tabs .tabs-item-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: translateY(-75%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.tabs .tabs-item-label:hover,
+.tabs .tabs-item[open] > .tabs-item-label {
+  background-color: #e6f2fa;
+  color: var(--brand-blue);
+}
+
+.tabs .tabs-item[open] > .tabs-item-label::after {
+  transform: translateY(-25%) rotate(-135deg);
+}
+
+.tabs .tabs-item-label > :first-child {
+  display: inline;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.tabs .tabs-item-body {
+  padding: 10px 43px 15px;
+  color: var(--text-color);
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.tabs .tabs-item-body p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.tabs .tabs-item-body ul,
+.tabs .tabs-item-body ol {
+  margin: 0 0 10px;
+  padding: 0 0 0 40px;
+  color: #333;
+  font-size: 18px;
+  line-height: 25.02px;
+}
+
+.tabs .tabs-item-body li {
+  margin: 0;
+  padding: 0;
+}
+
+.tabs .tabs-item-body a:any-link {
+  color: var(--link-color);
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.tabs .tabs-item-body a:hover {
+  color: var(--link-hover-color);
+}
+
+.tabs .tabs-panel-content {
+  padding: 24px 43px;
+}
+
+/* ---------- search integration: show every panel with matches ---------- */
+.tabs.tabs-searching .tabs-list {
+  display: none;
+}
+
+.tabs.tabs-searching .tabs-panel[aria-hidden] {
+  display: none;
+}
+
+.tabs.tabs-searching .tabs-panel.tabs-panel-match {
+  display: block;
+}
+
+.tabs.tabs-searching .tabs-panel.tabs-panel-match + .tabs-panel.tabs-panel-match {
+  margin-top: 24px;
+}
+
+/* ---------- tablet: single scrolling row ---------- */
+@media (width >= 768px) {
+  .tabs .tabs-list {
+    flex-wrap: nowrap;
+    padding: 10px 10px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs .tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs .tabs-tab {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    padding: 0 6px;
+    line-height: 17.14px;
+  }
+
+  .tabs .tabs-tab-image {
+    width: 60px;
+    height: 90px;
+    margin: 0;
+  }
+
+  .tabs .tabs-tab-label {
+    padding: 20px 18px 13px;
+  }
+
+  .tabs .tabs-tab[aria-selected='true'] .tabs-tab-label {
+    border-bottom-color: var(--brand-blue);
+  }
+
+  .tabs .tabs-panel {
+    margin-top: 46px;
+  }
+
+  .tabs .tabs-item {
+    background-size: calc(100% - 48px) 1px;
+  }
+
+  .tabs .tabs-item-label {
+    padding: 44px 41px 44px 26px;
+  }
+
+  .tabs .tabs-item-label::before {
+    inset: 41px 24px;
+  }
+
+  .tabs .tabs-item-label::after {
+    right: 28px;
+  }
+
+  .tabs .tabs-item-body {
+    padding: 10px 50px 15px;
+  }
+
+  .tabs .tabs-panel-content {
+    padding: 24px 50px;
+  }
+}
+
+/* ---------- desktop: centered row of 200px+ tabs ---------- */
+@media (width >= 900px) {
+  .tabs .tabs-list {
+    justify-content: safe center;
+  }
+
+  .tabs .tabs-tab {
+    min-width: 200px;
+    font-size: 18px;
+    line-height: 25.71px;
+  }
+
+  .tabs .tabs-tab-image {
+    width: 100px;
+    height: 90px;
+  }
+}

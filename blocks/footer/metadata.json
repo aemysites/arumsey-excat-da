@@ -1,0 +1,21 @@
+{
+  "variantName": "footer",
+  "baseBlock": "footer",
+  "canonicalModel": "configuration",
+  "visualCharacteristics": {
+    "colorScheme": "mixed",
+    "complexity": "moderate",
+    "density": "moderate"
+  },
+  "contentPattern": "Global footer loaded from the /footer fragment: brand logo, language selector (EN), a row of utility links (FAQs, Help Articles, Privacy Statement, On the Road Collection, Your Privacy Choices), copyright line, and Google Play / App Store badge links on the right.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/blog/best-experience-for-deliveries.html"
+    ],
+    "reuseCount": 1
+  },
+  "options": [],
+  "memberVariantIds": [
+    "footer-global"
+  ]
+}
