@@ -99,6 +99,10 @@ export default async function decorate(block) {
     content.append(section);
   });
 
+  // Document Authoring wraps list item text in <p>: unwrap so links sit
+  // directly in the <li>, the same as the plain footer document
+  content.querySelectorAll('li > p').forEach((p) => p.replaceWith(...p.childNodes));
+
   content.querySelectorAll('li').forEach((li) => {
     if (li.querySelector(':scope > ul')) decorateToggle(li);
     else if (!li.querySelector('a')) li.classList.add('footer-text');

@@ -220,6 +220,10 @@ export default async function decorate(block) {
     }
   }
 
+  // Document Authoring wraps list item text in <p>: unwrap so labels and links
+  // sit directly in the <li>, the same as the plain nav document
+  panel.querySelectorAll('li > p').forEach((p) => p.replaceWith(...p.childNodes));
+
   panel.querySelectorAll('li').forEach((li) => {
     if (li.querySelector(':scope > ul')) decorateDropdown(li, nav);
   });
