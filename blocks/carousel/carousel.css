@@ -1,0 +1,92 @@
+/* Carousel - structural styles only (brand styling is applied by the design pass) */
+
+.carousel {
+  position: relative;
+}
+
+.carousel .carousel-slides {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 85%;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carousel .carousel-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel .carousel-slide {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.carousel .carousel-slide-image {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.carousel .carousel-slide-image picture,
+.carousel .carousel-slide-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.carousel .carousel-slide-content > :first-child {
+  margin-top: 0;
+}
+
+.carousel .carousel-slide-content > :last-child {
+  margin-bottom: 0;
+}
+
+/* dot controls - only shown while the track overflows */
+.carousel .carousel-nav {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.carousel.carousel-overflowing .carousel-nav {
+  display: flex;
+}
+
+.carousel .carousel-dot {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid currentcolor;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel .carousel-dot.active {
+  background: currentcolor;
+}
+
+@media (width >= 600px) {
+  .carousel .carousel-slides {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+}
+
+@media (width >= 900px) {
+  .carousel .carousel-slides {
+    grid-auto-columns: calc((100% - 2 * 32px) / 3);
+    gap: 32px;
+  }
+}

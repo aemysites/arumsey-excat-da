@@ -1,0 +1,25 @@
+{
+  "variantName": "qr-reveal",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "large",
+    "structure": "heading + 1 CTAs + image"
+  },
+  "contentPattern": "Two-column grid (one column on mobile) of square app-download tiles. Each authored row is one tile: title (e.g. 'iPhone' / 'Android') | QR code image | button label (e.g. 'View App Store QR'). The QR starts dimmed under a veil with a centered pill button; clicking the button reveals the QR and hides the button.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/navigationlink.html",
+      "https://www.sparkdriverapp.com/en_us/signup.html"
+    ],
+    "reuseCount": 2
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_58f9527cfee6"
+  ]
+}

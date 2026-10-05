@@ -1,3 +1,13 @@
+/* Hero: full-width background media (Vimeo, video file or image) with a text panel.
+ * Values extracted from the source (div.media-hero-2-0); see migration-work/hero-extracted.css.
+ * < 768px: square media, white panel overlapping its lower edge.
+ * 768-899px: 16:9 media, white panel overlapping its lower edge.
+ * >= 900px: 16:9 media, translucent dark panel anchored bottom-left.
+ */
+main > .section.hero-container {
+  padding: 0;
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -5,33 +15,175 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: grid;
+  grid-template: auto / 1fr;
+  background-color: var(--light-color);
+  color: var(--text-color);
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Background media */
+.hero .hero-media {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #000;
+  container-type: size;
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
-}
-
-.hero img {
-  object-fit: cover;
+.hero .hero-media picture,
+.hero .hero-media img,
+.hero .hero-media video {
+  display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+}
+
+/* Vimeo iframe sized to cover the media box (16:9 source video) */
+.hero .hero-media .hero-vimeo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 177.78cqh);
+  height: max(100cqh, 56.25cqw);
+  border: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hero .hero-media .hero-vimeo.is-playing {
+  opacity: 1;
+}
+
+/* Text panel */
+.hero .hero-content {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  margin: 245px 33px 0;
+  padding: 0 0 24px;
+  border-radius: 16px;
+  background-color: #fff;
+  color: var(--text-color);
+}
+
+.hero .hero-content h1 {
+  margin: 0;
+  padding: 16px 16px 0;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px;
+  color: inherit;
+}
+
+.hero .hero-content p {
+  margin: 0;
+  padding: 0 16px;
+  font-size: 20px;
+  line-height: 28px;
+  color: inherit;
+}
+
+.hero .hero-content a:not(.button) {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* CTA */
+main .hero .hero-content .hero-cta {
+  margin: 0;
+  padding: 16px;
+}
+
+/* source button: 54px tall, label weight 400 */
+main .hero .hero-content a.button:any-link {
+  width: 100%;
+  margin: 8px 0;
+  padding-block: 14px;
+  font-weight: 400;
+}
+
+/* No background media: plain text block */
+.hero.no-media {
+  background-color: transparent;
+}
+
+.hero.no-media .hero-content {
+  margin: 0;
+  background-color: transparent;
+}
+
+@media (width >= 768px) {
+  .hero .hero-media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero .hero-content {
+    margin: 285px 5% 0;
+  }
+
+  .hero .hero-content h1 {
+    padding: 24px 24px 0;
+  }
+
+  .hero .hero-content p {
+    padding: 0 32px;
+  }
+
+  main .hero .hero-content .hero-cta {
+    padding: 16px 24px;
+  }
+
+  .hero .hero-content .hero-cta + p {
+    padding-top: 8px;
+  }
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .hero.no-media {
+    aspect-ratio: auto;
+  }
+
+  .hero .hero-media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
+  }
+
+  .hero .hero-content {
+    position: absolute;
+    left: 40px;
+    bottom: 72px;
+    width: calc(100% - 80px);
+    max-width: 780px;
+    margin: 0;
+    background-color: rgb(0 0 0 / 35%);
+    color: #fff;
+  }
+
+  .hero.no-media .hero-content {
+    position: relative;
+    inset: auto;
+    color: inherit;
+  }
+
+  .hero .hero-content h1 {
+    font-size: 54px;
+    line-height: 64.8px;
+  }
+
+  main .hero .hero-content a.button:any-link {
+    width: auto;
+    margin: 0;
   }
 }

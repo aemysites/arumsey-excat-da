@@ -1,0 +1,41 @@
+{
+  "variantName": "columns",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "heading + text"
+  },
+  "contentPattern": "Default: one row of 2-3 cells laid out side by side on desktop and stacked on mobile - media/text pairs (image or illustration in one cell; heading, tag, text and optional outlined CTA in the other) or 2-3 up items with an icon above a heading and text or bullet list. Icon Scroll option: 3 illustrated items (icon/illustration, bold heading, short text) shown as a centered wrapping row on desktop and a horizontal scroll-snap row with dot indicators on mobile.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us.html",
+      "https://www.sparkdriverapp.com/en_us/blog.html",
+      "https://www.sparkdriverapp.com/en_us/delivery-driver-gig-for-college-students.html",
+      "https://www.sparkdriverapp.com/en_us/earnings.html",
+      "https://www.sparkdriverapp.com/en_us/holiday-seasonal-gig-opportunities.html",
+      "https://www.sparkdriverapp.com/en_us/offers.html",
+      "https://www.sparkdriverapp.com/en_us/rewards.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewards1.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewardstest01.html"
+    ],
+    "reuseCount": 9
+  },
+  "options": [
+    { "class": "icon-scroll", "label": "Icon Scroll" }
+  ],
+  "memberVariantIds": [
+    "v_200c66473556",
+    "v_1f03137ddfba",
+    "v_8e2de8858a81",
+    "v_441f3277d938",
+    "v_528f0461f989",
+    "v_9f32abc69f9c",
+    "v_e20b15463106",
+    "v_e85409c7503f"
+  ]
+}

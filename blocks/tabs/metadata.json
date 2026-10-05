@@ -1,0 +1,25 @@
+{
+  "variantName": "tabs",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "text + list"
+  },
+  "contentPattern": "FAQ tabs: a centered row of tabs, each a circular illustration above a label (e.g. 'Getting started', 'Earnings & rewards', 'Eligibility', 'General'), active tab underlined. Each tab's panel is a bordered, rounded box of collapsible Q&A items (bold question with a chevron on the right, thin dividers, answer expands on click). Authored as rows of tab (image + label) | question | answer (an empty tab cell continues the previous tab), or tab | panel content with each question as a heading or bold paragraph.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/faqs.html"
+    ],
+    "reuseCount": 1
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_02d7b88ba46b",
+    "v_806664b4e3f1"
+  ]
+}

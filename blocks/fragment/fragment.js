@@ -20,7 +20,11 @@ import {
  */
 export async function loadFragment(path) {
   if (path && path.startsWith('/')) {
-    const resp = await fetch(`${path}.plain.html`);
+    let resp = await fetch(`${path}.plain.html`);
+    // local preview (aem up --html-folder content) serves documents under /content
+    if (!resp.ok && window.location.pathname.startsWith('/content/') && !path.startsWith('/content/')) {
+      resp = await fetch(`/content${path}.plain.html`);
+    }
     if (resp.ok) {
       const main = document.createElement('main');
       main.innerHTML = await resp.text();

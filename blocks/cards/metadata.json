@@ -1,0 +1,31 @@
+{
+  "variantName": "cards",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "large",
+    "structure": "heading + text + 1 CTAs + 21 images"
+  },
+  "contentPattern": "Collection of cards, one row per card with an image cell and a text cell. Default: plain responsive grid of image-over-text cards. Article List option (the catalog look on the blog listing): 4-across grid (1/2/3 columns on smaller screens) of article cards, each with a photo, a date line, a 2-line clamped bold title (optionally linked, making the whole card clickable) and a 3-line clamped excerpt; only the first 8 cards show until a centered outlined \"Show All\" button reveals the rest (an optional trailing link-only row sets the button label).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/navigationlink.html",
+      "https://www.sparkdriverapp.com/en_us/signup.html",
+      "https://www.sparkdriverapp.com/en_us/blog.html"
+    ],
+    "reuseCount": 3
+  },
+  "options": [
+    {
+      "class": "article-list",
+      "label": "Article List"
+    }
+  ],
+  "memberVariantIds": [
+    "v_7ef2d4f0458d"
+  ]
+}

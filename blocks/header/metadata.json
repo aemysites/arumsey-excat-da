@@ -1,0 +1,21 @@
+{
+  "variantName": "header",
+  "baseBlock": "header",
+  "canonicalModel": "configuration",
+  "visualCharacteristics": {
+    "colorScheme": "mixed",
+    "complexity": "complex",
+    "density": "moderate"
+  },
+  "contentPattern": "Global header loaded from the /nav fragment: brand logo on the left, primary navigation sections (Earnings, Offers, Rewards with dropdowns; Blog, FAQ as plain links), and a tools area on the right with a language selector (EN) and a pill SIGN UP CTA; collapses to a hamburger menu on mobile.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us/blog/best-experience-for-deliveries.html"
+    ],
+    "reuseCount": 1
+  },
+  "options": [],
+  "memberVariantIds": [
+    "header-global"
+  ]
+}

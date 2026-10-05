@@ -1,0 +1,32 @@
+{
+  "variantName": "carousel",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "large",
+    "structure": "heading + text + 3 images"
+  },
+  "contentPattern": "Feature carousel: a row of three slides, each a centered illustration above a left-aligned heading and short paragraph (e.g. 'Distance', 'Size', 'Extras'). On mobile the slides form a horizontally swipeable track with dot controls; on desktop all three sit side by side. Usually preceded by a centered section heading as default content. Authored as one row per slide: image | heading + text.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us.html",
+      "https://www.sparkdriverapp.com/en_us/earnings.html",
+      "https://www.sparkdriverapp.com/en_us/rewards.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewards1.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewardstest01.html",
+      "https://www.sparkdriverapp.com/es_us.html",
+      "https://www.sparkdriverapp.com/es_us/earnings.html",
+      "https://www.sparkdriverapp.com/es_us/rewards.html",
+      "https://www.sparkdriverapp.com/es_us/rewards/rewards.html"
+    ],
+    "reuseCount": 9
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_1f03137ddfba"
+  ]
+}

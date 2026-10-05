@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -11,61 +13,40 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
-
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  /* colors and fonts: see brand.css */
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* heading sizes (mobile) */
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 32px;
+  --heading-font-size-l: 20px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 16px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 90px;
 }
 
-/* fallback fonts */
+/* fallback font */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
+  font-family: rubik-fallback;
+  size-adjust: 95%;
   src: local('Arial');
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
+    --heading-font-size-xxl: 48px;
     --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
+    --heading-font-size-l: 32px;
+    --heading-font-size-m: 24px;
+    --heading-font-size-s: 24px;
     --heading-font-size-xs: 18px;
   }
 }
@@ -77,11 +58,19 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.5;
+
+  /* the off-canvas mobile nav panel must not widen the page */
+  overflow-x: clip;
 }
 
 body.appear {
   display: block;
+}
+
+main strong,
+main b {
+  font-weight: 500;
 }
 
 header {
@@ -104,19 +93,30 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--text-color);
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
+h1 {
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  font-size: var(--heading-font-size-xxl);
+}
+
 h2 { font-size: var(--heading-font-size-xl); }
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
+
+h5 {
+  margin-top: 10px;
+  font-size: var(--heading-font-size-s);
+}
+
 h6 { font-size: var(--heading-font-size-xs); }
 
 p,
@@ -125,8 +125,17 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+li {
+  line-height: 25.71px;
+}
+
+/* source paragraphs are separated by an empty line (27px) */
+main .default-content-wrapper > p {
+  margin-bottom: 27px;
 }
 
 code,
@@ -143,7 +152,7 @@ pre {
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: 0 16px;
 }
 
 input,
@@ -156,58 +165,78 @@ button {
 /* links */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
   overflow-wrap: break-word;
 }
 
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline;
 }
 
-/* buttons */
-a.button:any-link,
-button {
+/* buttons: blue pill (primary) and outlined pill (secondary) */
+main .button-container {
+  margin: 16px 0;
+}
+
+:where(main) a.button:any-link,
+:where(main) button {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  min-width: 200px;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 15px 24px;
   font-family: var(--body-font-family);
+  font-size: 16px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.5px;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  text-transform: uppercase;
+  background-color: var(--brand-blue);
+  color: #fff;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
+:where(main) a.button:hover,
+:where(main) a.button:focus,
+:where(main) button:hover,
+:where(main) button:focus {
+  background-color: var(--brand-blue);
+  color: #fff;
+  text-decoration: none;
   cursor: pointer;
 }
 
-button:disabled,
-button:disabled:hover {
+:where(main) button:disabled,
+:where(main) button:disabled:hover {
   background-color: var(--light-color);
   cursor: unset;
 }
 
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+:where(main) a.button.secondary,
+:where(main) button.secondary {
+  padding: 15px 44px;
+  border: 1px solid var(--dark-color);
+  background-color: #fff;
+  color: var(--dark-color);
+}
+
+:where(main) a.button.secondary:hover,
+:where(main) a.button.secondary:focus,
+:where(main) button.secondary:hover,
+:where(main) button.secondary:focus {
+  background-color: #fff;
+  color: var(--dark-color);
+  box-shadow: inset 0 0 0 1px var(--dark-color);
+  text-decoration: none;
 }
 
 main img {
@@ -229,29 +258,154 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: 32px 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: var(--content-max-width);
   margin: auto;
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
-  margin-top: 0;
+@media (width >= 900px) {
+  main > .section {
+    padding: var(--section-padding) 0;
+  }
+
+  /* source content column: 92% of the viewport, up to 1325px */
+  main > .section > div {
+    width: 92%;
+    max-width: 1325px;
+    padding: 0;
+  }
+}
+
+/* icon lists: list items that start with an icon image (e.g. eligibility checklist) */
+main .default-content-wrapper:has(> ul > li > p:first-child > picture) > h2 {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+main .default-content-wrapper > ul:has(> li > p:first-child > picture) {
+  max-width: 792px;
+  margin: 0 auto 10px;
+  padding: 0;
+  list-style: none;
+}
+
+main .default-content-wrapper > ul > li:has(> p:first-child > picture) {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  column-gap: 16px;
+  margin: 16px 0;
+}
+
+main .default-content-wrapper > ul > li > p:first-child:has(> picture) {
+  grid-row: 1 / span 10;
+  margin: 0;
+  line-height: 0;
+}
+
+main .default-content-wrapper > ul > li > p:first-child > picture img {
+  width: 30px;
+  height: 23px;
+  object-fit: contain;
+}
+
+main .default-content-wrapper > ul > li:has(> p:first-child > picture) > h3 {
+  margin: 2.5px 0 0;
+}
+
+main .default-content-wrapper > ul > li:has(> p:first-child > picture) > p {
+  margin: 0;
+  line-height: 27px;
+}
+
+main .default-content-wrapper > ul > li:has(> p:first-child > picture) > ul {
+  margin: 4px 0;
+  padding: 0 18px;
+  list-style: disc;
+}
+
+main .default-content-wrapper > ul > li:has(> p:first-child > picture) > ul > li {
+  margin: 16px 0;
 }
 
 @media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
+  main .default-content-wrapper > ul > li:has(> p:first-child > picture) {
+    grid-template-columns: 42px 1fr;
+  }
+
+  main .default-content-wrapper > ul > li > p:first-child > picture img {
+    width: 42px;
+    height: 33px;
+  }
+
+  main .default-content-wrapper > ul > li:has(> p:first-child > picture) > h3 {
+    margin: 0;
   }
 }
 
 /* section metadata */
+
+/* narrow reading column like the source (blog articles, campaign intros) */
+main > .section.article > div,
+main > .section.narrow > div {
+  max-width: 790px;
+}
+
+main .section.centered .default-content-wrapper,
+main .section.narrow .default-content-wrapper {
+  text-align: center;
+}
+
+main .section.off-white {
+  background-color: #fafafa;
+}
+
+main > .section.article .default-content-wrapper > p:has(> picture) {
+  margin-bottom: 64px;
+}
+
+main > .section.article .default-content-wrapper > p > picture img {
+  border-radius: 8px;
+}
+
+main > .section.article .video-wrapper {
+  margin-bottom: 50px;
+}
+
+/* blog article meta row: tag pill | date | read time */
+main > .section.article > .default-content-wrapper:first-child > p:nth-of-type(-n+3) {
+  display: inline-block;
+  margin: 0 0 50px;
+  padding: 0 8px;
+  border-right: 1px solid var(--text-color);
+  font-size: 13.6px;
+  line-height: 19.43px;
+  vertical-align: middle;
+}
+
+main > .section.article > .default-content-wrapper:first-child > p:nth-of-type(1) {
+  margin-right: 8px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 2px;
+  background-color: #e7ecf4;
+  color: var(--brand-navy);
+  font-size: 12px;
+  line-height: 1;
+}
+
+main > .section.article > .default-content-wrapper:first-child > p:nth-of-type(3) {
+  border-right: 0;
+}
+
+
 main .section.light,
+main .section.light-blue,
 main .section.highlight {
   background-color: var(--light-color);
-  margin: 0;
-  padding: 40px 0;
+  padding: 50px 0;
 }

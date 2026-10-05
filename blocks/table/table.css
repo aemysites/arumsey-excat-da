@@ -1,0 +1,159 @@
+/* values from source: div.richtext table.desktop-table / table.mobile-table */
+.table.block {
+  width: 100%;
+  margin: 27px 0 34px; /* collapses with the preceding paragraph's margin */
+  overflow-x: auto;
+  color: var(--text-color);
+}
+
+.table.block table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: var(--body-font-size-m);
+  line-height: 27px;
+}
+
+.table.block table th,
+.table.block table td {
+  padding: 8px 10px;
+  border: 0;
+  font-weight: 400;
+  text-align: left;
+  vertical-align: top;
+}
+
+.table.block table strong,
+.table.block table b {
+  font-weight: 500;
+}
+
+.table.block table th p,
+.table.block table td p {
+  margin: 0;
+}
+
+.table.block table td p + p {
+  margin-top: 0.25em;
+}
+
+/* mobile: stacked "label | value" cards (source mobile-table presentation) */
+.table.block:not(.no-header) table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.table.block:not(.no-header) table tbody,
+.table.block:not(.no-header) table tbody tr {
+  display: block;
+}
+
+.table.block:not(.no-header) table tbody tr + tr::before {
+  content: '';
+  display: block;
+  height: 0;
+  margin: 21px 10px;
+  border-top: 1px solid #ccc;
+}
+
+.table.block:not(.no-header) table tbody td {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+}
+
+.table.block:not(.no-header) table tbody td:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.table.block:not(.no-header) table tbody td::before {
+  content: attr(data-label);
+  font-weight: 500;
+}
+
+.table.block:not(.no-header) table tbody td::before,
+.table.block:not(.no-header) table tbody td > .table-cell-content {
+  min-width: 0;
+  padding: 8px 10px;
+  overflow-wrap: break-word;
+}
+
+.table.block:not(.no-header) table tbody td:not([data-label])::before {
+  content: none;
+}
+
+.table.block:not(.no-header) table tbody td:not([data-label]) {
+  grid-template-columns: 1fr;
+}
+
+/* desktop: regular 2-column table (source switches at 768px) */
+@media (width >= 768px) {
+  .table.block table {
+    table-layout: fixed;
+  }
+
+  .table.block:not(.no-header) table thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .table.block:not(.no-header) table tbody {
+    display: table-row-group;
+  }
+
+  .table.block:not(.no-header) table tbody tr {
+    display: table-row;
+  }
+
+  .table.block:not(.no-header) table tbody tr + tr::before {
+    content: none;
+  }
+
+  .table.block:not(.no-header) table tbody td {
+    display: table-cell;
+    padding: 8px 10px;
+  }
+
+  .table.block:not(.no-header) table tbody td:nth-child(even) {
+    background-color: transparent;
+  }
+
+  .table.block:not(.no-header) table tbody td::before {
+    content: none;
+  }
+
+  .table.block:not(.no-header) table tbody td > .table-cell-content {
+    padding: 0;
+  }
+
+  .table.block table tbody tr:nth-child(odd) {
+    background-color: #f4f4f4;
+  }
+}
+
+/* no header variant */
+.table.block.no-header table tbody tr {
+  border-top: 1px solid;
+}
+
+/* striped variant (tables with a header row are striped on desktop by default) */
+.table.block.no-header.striped tbody tr:nth-child(odd) {
+  background-color: #f4f4f4;
+}
+
+/* bordered variant */
+/* stylelint-disable no-descending-specificity -- only sets border, which the card rules don't touch */
+.table.block.bordered table th,
+.table.block.bordered table td {
+  border: 1px solid;
+}
+/* stylelint-enable no-descending-specificity */

@@ -1,0 +1,109 @@
+/*
+ * Search block: centered page title above a white pill search field on the
+ * light-blue band. Values extracted from sparkdriverapp.com/en_us/faqs.html
+ * (see migration-work/search-extracted.css).
+ */
+
+/* the band the block sits in: 42px above the title, 69px below the field */
+main > .section.search-container {
+  padding: 42px 0 69px;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5px; /* source mobile inset is 29px; section gutter supplies 24px */
+  color: var(--text-color);
+  text-align: center;
+}
+
+.search .search-header {
+  width: 100%;
+}
+
+.search .search-title {
+  margin: 0 0 33px;
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 52.8px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.search .search-box {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.search .search-input {
+  display: block;
+  width: 100%;
+  height: 57.7031px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 16px 24px 16px 64px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #fff;
+  background-image: url('./search-icon.svg');
+  background-position: 24px 50%;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25.7143px;
+  appearance: none;
+}
+
+.search .search-input::placeholder {
+  color: rgb(117 117 117);
+  opacity: 1;
+}
+
+.search .search-input::-webkit-search-decoration {
+  appearance: none;
+}
+
+.search .search-status {
+  min-height: 1em;
+  margin: 8px 0 0;
+  font-size: var(--body-font-size-s);
+}
+
+.search .search-status:empty {
+  display: none;
+}
+
+.search .search-results {
+  width: 100%;
+  max-width: 760px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.search .search-results li + li {
+  margin-top: 16px;
+}
+
+.search .search-results p {
+  margin: 4px 0 0;
+}
+
+@media (width >= 900px) {
+  .search {
+    padding: 0;
+  }
+
+  .search .search-title {
+    margin-bottom: 50px;
+  }
+}

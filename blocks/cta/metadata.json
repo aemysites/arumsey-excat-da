@@ -1,0 +1,63 @@
+{
+  "variantName": "cta",
+  "baseBlock": "cta",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "heading + text + 1 CTAs"
+  },
+  "contentPattern": "Centered closing call-to-action banner: a heading, an optional one-line subline, and one or two pill buttons side by side (e.g. 'Sign up', 'Get started now', 'Enroll now') on a plain background. Authored as a single cell containing the heading, optional paragraph, and link(s). Option \"secondary\": a lone, centered, outlined (secondary) button with no heading or text that closes a section (e.g. \"Learn more\").",
+  "usage": {
+    "pagesUsing": [
+      "https://www.sparkdriverapp.com/en_us.html",
+      "https://www.sparkdriverapp.com/en_us/blog.html",
+      "https://www.sparkdriverapp.com/en_us/blog/best-experience-for-deliveries.html",
+      "https://www.sparkdriverapp.com/en_us/blog/better-future.html",
+      "https://www.sparkdriverapp.com/en_us/blog/bryan-puts-family-first.html",
+      "https://www.sparkdriverapp.com/en_us/blog/crushed-2024.html",
+      "https://www.sparkdriverapp.com/en_us/blog/from-soccer-games-to-the-app.html",
+      "https://www.sparkdriverapp.com/en_us/blog/health-freedom-family.html",
+      "https://www.sparkdriverapp.com/en_us/blog/image-sharing.html",
+      "https://www.sparkdriverapp.com/en_us/blog/independent-contractor-flex.html",
+      "https://www.sparkdriverapp.com/en_us/blog/infuses-kindness-into-customer-delivery.html",
+      "https://www.sparkdriverapp.com/en_us/blog/making-a-difference-in-muskogee.html",
+      "https://www.sparkdriverapp.com/en_us/blog/mothers-day-duo.html",
+      "https://www.sparkdriverapp.com/en_us/blog/new-life-while-delivering.html",
+      "https://www.sparkdriverapp.com/en_us/blog/retired-grandma-empowered.html",
+      "https://www.sparkdriverapp.com/en_us/blog/safeguarding-the-platform.html",
+      "https://www.sparkdriverapp.com/en_us/blog/spark-of-love.html",
+      "https://www.sparkdriverapp.com/en_us/blog/storm-chaser.html",
+      "https://www.sparkdriverapp.com/en_us/blog/trading-scrubs-for-steering-wheels.html",
+      "https://www.sparkdriverapp.com/en_us/blog/veteran-uses-spark-driver.html",
+      "https://www.sparkdriverapp.com/en_us/blog/website-and-app-updates.html",
+      "https://www.sparkdriverapp.com/en_us/blog/welcome.html",
+      "https://www.sparkdriverapp.com/en_us/blog/world-class-experience.html",
+      "https://www.sparkdriverapp.com/en_us/delivery-driver-gig-for-college-students.html",
+      "https://www.sparkdriverapp.com/en_us/earnings.html",
+      "https://www.sparkdriverapp.com/en_us/holiday-seasonal-gig-opportunities.html",
+      "https://www.sparkdriverapp.com/en_us/instore.html",
+      "https://www.sparkdriverapp.com/en_us/offers.html",
+      "https://www.sparkdriverapp.com/en_us/rewards.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewards1.html",
+      "https://www.sparkdriverapp.com/en_us/rewards/rewardstest01.html",
+      "https://www.sparkdriverapp.com/en_us/faqs.html"
+    ],
+    "reuseCount": 32
+  },
+  "options": [
+    {
+      "class": "secondary",
+      "label": "Secondary"
+    }
+  ],
+  "memberVariantIds": [
+    "v_9be37fce9b63",
+    "v_5d259d33b20f",
+    "v_2ed146cca4f0",
+    "v_b721da9f9e43"
+  ]
+}
