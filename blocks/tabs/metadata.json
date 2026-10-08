@@ -1,0 +1,48 @@
+{
+  "variantName": "tabs",
+  "baseBlock": "tabs",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "moderate",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "large",
+    "structure": "heading + text + 32 CTAs + 32 images + list"
+  },
+  "contentPattern": {
+    "structure": "tab list of labels; each panel holds intro text + grid of product cards (inline or loaded from a fragment)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_8ab7ece34e9a",
+    "v_8ab7ece34e9a-1"
+  ],
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.myastrazeneca.ch/de/startseite/produkte.html",
+        "instanceId": "2f00e970",
+        "screenshot": ".pages/www_myastrazeneca_ch_de_startseite_produkte_html--71e7356f/blocks/2f00e970.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/fr/startseite/produkte.html",
+        "instanceId": "2f00e970",
+        "screenshot": ".pages/www_myastrazeneca_ch_fr_startseite_produkte_html--ee1c829d/blocks/2f00e970.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/it/startseite/produkte.html",
+        "instanceId": "2f00e970",
+        "screenshot": ".pages/www_myastrazeneca_ch_it_startseite_produkte_html--c90fefd4/blocks/2f00e970.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/en/startseite/produkte.html",
+        "instanceId": "2f00e970",
+        "screenshot": ".pages/www_myastrazeneca_ch_en_startseite_produkte_html--96d99f3e/blocks/2f00e970.jpg"
+      }
+    ],
+    "reuseCount": 4
+  }
+}

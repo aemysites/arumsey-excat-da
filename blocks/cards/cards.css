@@ -1,27 +1,197 @@
+/*
+ * Cards — image-top / text-bottom teasers (myastrazeneca.ch .cmp-teaser).
+ * Mobile (< 768px): one full-bleed column, square corners.
+ * Tablet/desktop (>= 768px): 3 columns (10px gap); 2 image cards use 2 columns (20px gap).
+ */
+
+/* stop the global `.icon` (24x24 inline-block) rule from collapsing `.cards.icon` */
+.cards.icon {
+  display: block;
+  width: auto;
+  height: auto;
+}
+
 .cards > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+}
+
+/* text-only cards: centered row */
+.cards > ul:not(:has(.cards-card-image)) {
+  justify-content: center;
+}
+
+/* full-bleed on mobile when the block sits directly in a page section */
+main > .section > .cards-wrapper > .cards > ul {
+  margin: 0 calc(-1 * var(--content-inset));
+}
+
+/* two image cards: two-column layout with a 20px gap */
+.cards > ul:has(> li:nth-child(2):last-child > .cards-card-image) {
+  gap: 20px;
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
-}
-
-.cards .cards-card-body {
-  margin: 16px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  max-width: 100%;
+  overflow: hidden;
+  text-align: center;
 }
 
 .cards .cards-card-image {
   line-height: 0;
 }
 
-.cards > ul > li img {
+.cards .cards-card-image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+}
+
+.cards .cards-card-body {
+  flex: 1 1 0%;
+  padding: 24px 16px;
+  background-color: var(--light-grey-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+/* option: icon — transparent body under a full-width icon image */
+.cards.icon .cards-card-body {
+  background-color: transparent;
+}
+
+.cards .cards-card-body > * {
+  margin: 0;
+}
+
+.cards .cards-card-body > :is(h2, h3, h4, h5, h6) {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+  line-height: var(--heading-line-height-m);
+  color: var(--text-color);
+}
+
+.cards .cards-card-body > :is(h2, h3, h4, h5, h6) a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 16px between title, description and call to action (source flex gap) */
+.cards .cards-card-body > :is(h2, h3, h4, h5, h6) + *,
+.cards .cards-card-body > * + .button-container {
+  margin-top: 16px;
+}
+
+/* text-only cards: bordered, no fill */
+.cards > ul > li:not(:has(.cards-card-image)) {
+  border: 1px solid var(--border-color);
+}
+
+.cards > ul > li:not(:has(.cards-card-image)) .cards-card-body {
+  background-color: transparent;
+}
+
+/* option: overlay — blurred card under a dark layer, centered white text (product tiles) */
+.cards.overlay > ul > li {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+}
+
+.cards.overlay > ul > li.cards-card-has-overlay {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  min-height: 410px;
+}
+
+.cards.overlay > ul > li.cards-card-has-overlay > div {
+  grid-area: 1 / 1;
+}
+
+.cards.overlay > ul > li.cards-card-has-overlay .cards-card-image {
+  align-self: start;
+  filter: blur(7px);
+}
+
+.cards.overlay > ul > li.cards-card-has-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--dark-color);
+  opacity: 0.9;
+}
+
+.cards.overlay > ul > li.cards-card-has-overlay .cards-card-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: transparent;
+  color: #fff;
+}
+
+.cards.overlay .cards-card-body > :is(h2, h3, h4, h5, h6),
+.cards.overlay .cards-card-body > :is(h2, h3, h4, h5, h6) + p {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+  color: #fff;
+}
+
+/* generic name sits directly under the product name */
+.cards.overlay .cards-card-body > :is(h2, h3, h4, h5, h6) + p {
+  margin-top: 0;
+}
+
+.cards.overlay .cards-card-body > :is(h2, h3, h4, h5, h6) + p + p:not(.button-container) {
+  margin-top: 16px;
+}
+
+.cards.overlay .cards-card-body a:any-link:not(.button) {
+  color: #fff;
+}
+
+.cards.overlay .cards-card-body > * + .button-container {
+  margin-top: 20px;
+}
+
+/* a paragraph of indication links after the description (home page) */
+.cards .cards-card-body > p + p:not(.button-container):has(> a:first-child) {
+  margin-top: 24px;
+}
+
+@media (width >= 768px) {
+  main > .section > .cards-wrapper > .cards > ul {
+    margin: 0;
+  }
+
+  .cards > ul > li {
+    flex: 1 1 calc(33.33% - 6.67px);
+    max-width: calc(33.33% - 6.67px);
+    border-radius: 8px;
+  }
+
+  .cards > ul:has(> li:nth-child(2):last-child > .cards-card-image) > li {
+    flex-basis: calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+
+  .cards .cards-card-body {
+    padding: 24px;
+  }
 }

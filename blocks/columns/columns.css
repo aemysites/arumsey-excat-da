@@ -1,33 +1,99 @@
+/* columns: source "teaser--text-image" / "teaser--text-left" and 2-column image containers */
+
+/* mobile: block bleeds to the viewport edge, image on top, text padded below */
+.columns {
+  margin: 0 calc(-1 * var(--content-inset));
+}
+
 .columns > div {
   display: flex;
   flex-direction: column;
 }
 
 .columns img {
+  display: block;
   width: 100%;
 }
 
 .columns > div > div {
   order: 1;
+  min-width: 0;
 }
 
 .columns > div > .columns-img-col {
   order: 0;
 }
 
-.columns > div > .columns-img-col img {
+.columns > div > .columns-img-col picture {
   display: block;
 }
 
+/* text cell */
+.columns > div > div:not(.columns-img-col) {
+  padding: 24px var(--content-inset);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.columns > div > div:not(.columns-img-col) > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns > div > div:not(.columns-img-col) :is(h1, h2, h3, h4, h5, h6) {
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.columns > div > div:not(.columns-img-col) :is(ul, ol) {
+  padding: 4px 0 10px 20px;
+}
+
+.columns > div > div:not(.columns-img-col) .button-container {
+  margin-top: 16px;
+}
+
+/* source CTA labels wrap instead of truncating on narrow screens */
+main .columns a.button:any-link {
+  white-space: normal;
+}
+
+/* image-only rows (2-column image container) */
+.columns > div:not(:has(> div:not(.columns-img-col))) {
+  gap: 20px;
+}
+
 @media (width >= 900px) {
+  .columns {
+    margin: 0;
+  }
+
   .columns > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
   }
 
   .columns > div > div {
-    flex: 1;
+    flex: 1 1 0;
     order: unset;
+  }
+
+  .columns > div > .columns-img-col {
+    order: unset;
+  }
+
+  .columns > div > div:not(.columns-img-col) {
+    padding: 0;
+  }
+
+  .columns > div > div:not(.columns-img-col) :is(ul, ol) {
+    padding-bottom: 12px;
+  }
+
+  .columns > div:not(:has(> div:not(.columns-img-col))) {
+    gap: 20px;
   }
 }

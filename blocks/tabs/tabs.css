@@ -1,0 +1,120 @@
+/*
+ * Tabs — myastrazeneca.ch .cmp-tabs (therapy-area tabs on /produkte).
+ * Sticky, horizontally scrollable tab list with a full-bleed white bar and 1px light-grey rule;
+ * Lexia 14px labels, pink (interaction color) on hover and when selected, 1px pink underline.
+ * Mobile (< 768px): the tab list bleeds to the viewport edges and scrolls horizontally.
+ */
+
+.tabs .tabs-list {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: 4.5px;
+  max-width: none;
+  margin: 0 calc(-1 * var(--content-inset));
+  padding: 8px 0;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--light-grey-color);
+
+  /* paint the white bar and its bottom rule edge to edge (ink overflow, no scrollbars) */
+  border-image: linear-gradient(to top, var(--light-grey-color) 1px, var(--background-color) 1px)
+    fill 0 0 1 0 / 0 0 1px 0 / 0 100vw;
+  background-color: var(--background-color);
+  scrollbar-width: none;
+}
+
+.tabs .tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* reset the global pink `button` styles */
+.tabs .tabs-list .tabs-tab {
+  box-sizing: border-box;
+  display: block;
+  flex: 0 0 auto;
+  max-width: none;
+  margin: 0;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: start;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+/* keyboard focus keeps the browser's default focus ring, as on the source */
+.tabs .tabs-list .tabs-tab:hover,
+.tabs .tabs-list .tabs-tab:focus {
+  background: none;
+  border-color: transparent;
+  color: var(--interaction-color);
+}
+
+.tabs .tabs-list .tabs-tab[aria-selected='true'] {
+  border-bottom-color: var(--interaction-color);
+  color: var(--interaction-color);
+}
+
+/* panels */
+.tabs .tabs-panel {
+  padding: 30px 0 0;
+
+  /* keep z-indexed panel content (card overlays) below the sticky tab list */
+  isolation: isolate;
+}
+
+.tabs .tabs-panel[aria-hidden='true'] {
+  display: none;
+}
+
+.tabs .tabs-panel > :first-child {
+  margin-top: 0;
+}
+
+/* intro text above the product grid */
+.tabs .tabs-panel > p,
+.tabs .tabs-panel > .section > .default-content-wrapper p {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.tabs .tabs-panel > .section > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
+}
+
+/* 40px between the intro text and the product grid */
+.tabs .tabs-panel > .section > .default-content-wrapper + .cards-wrapper {
+  margin-top: var(--section-spacing);
+}
+
+/* product grid is full-bleed on mobile, as on the source */
+.tabs .tabs-panel > .section > .cards-wrapper > .cards > ul {
+  margin: 0 calc(-1 * var(--content-inset));
+}
+
+@media (width >= 768px) {
+  .tabs .tabs-list {
+    margin: 0;
+  }
+
+  .tabs .tabs-list .tabs-tab {
+    line-height: 16px;
+  }
+
+  .tabs .tabs-panel {
+    padding-top: 36px;
+  }
+
+  .tabs .tabs-panel > .section > .cards-wrapper > .cards > ul {
+    margin: 0;
+  }
+}

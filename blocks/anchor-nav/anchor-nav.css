@@ -1,0 +1,128 @@
+/*
+ * Anchor Nav
+ * Two looks, one content model:
+ * 1. page sub-navigation (links to sibling pages, e.g. loaded from a fragment):
+ *    white bar with a light bottom rule, Lexia 14px links, current page
+ *    highlighted in pink with a pink underline.
+ * 2. in-page section navigation (links to #anchors):
+ *    full-width bar with light top/bottom rules, bold pink underlined links
+ *    separated by yellow vertical dividers.
+ * Both scroll horizontally (hidden scrollbar) when they don't fit.
+ */
+
+/* ---------- 1. page sub-navigation (default) ---------- */
+.anchor-nav .anchor-nav-list {
+  display: flex;
+  padding: 8px 0;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--light-grey-color);
+  overflow: hidden;
+}
+
+.anchor-nav .anchor-nav-list ul {
+  display: flex;
+  flex-wrap: nowrap;
+
+  /* the source items are inline-blocks separated by a word space */
+  gap: 4.5px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.anchor-nav .anchor-nav-list ul::-webkit-scrollbar {
+  display: none;
+}
+
+.anchor-nav .anchor-nav-item {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+
+.anchor-nav .anchor-nav-item a:any-link {
+  display: inline-block;
+  padding: 10px 16px;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  overflow-wrap: normal;
+}
+
+.anchor-nav .anchor-nav-item a:hover,
+.anchor-nav .anchor-nav-item a:focus-visible {
+  color: var(--interaction-color);
+}
+
+.anchor-nav .anchor-nav-item a.active,
+.anchor-nav .anchor-nav-item a[aria-current='page'] {
+  color: var(--interaction-color);
+  border-bottom: 1px solid var(--interaction-color);
+}
+
+/* the source bar runs edge to edge on phones */
+@media (width < 768px) {
+  .anchor-nav:not(:has(a[href^='#'])) {
+    margin-inline: calc(-1 * var(--content-inset));
+  }
+}
+
+/* the source bar sits flush under the hero */
+main .section > .hero-wrapper + .anchor-nav-wrapper {
+  margin-top: calc(-1 * var(--section-spacing));
+}
+
+/* ---------- 2. in-page section navigation (#anchor links) ---------- */
+.anchor-nav:has(a[href^='#']) {
+  padding: 10px 0;
+  border-block: 1px solid var(--light-grey-color);
+
+  /* stretch the top/bottom rules to the full viewport width */
+  border-image: linear-gradient(var(--light-grey-color) 0 0) 1 / 1px 0 / 0 100vw;
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-list {
+  margin: 16px 0;
+  padding: 0;
+  background-color: transparent;
+  border-bottom: 0;
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-list ul {
+  gap: 0;
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-item {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  border-left: 2px solid var(--accent-color);
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-item a:any-link {
+  display: inline;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--interaction-color);
+  text-decoration: underline;
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-item a:hover {
+  color: var(--interaction-color);
+}
+
+.anchor-nav:has(a[href^='#']) .anchor-nav-item a:active {
+  color: var(--title-color);
+}

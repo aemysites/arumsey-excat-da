@@ -5,6 +5,14 @@
       "previewOrg": "aemysites",
       "previewSite": "arumsey-excat-da",
       "contentHostUrl": "https://content.da.live/aemysites/arumsey-excat-da/"
+    },
+    "arumsey-excat-da2": {
+      "previewOrg": "aemysites",
+      "previewSite": "arumsey-excat-da2",
+      "contentHostUrl": "https://content.da.live/aemysites/arumsey-excat-da2/"
     }
-  }
+  },
+  "features": [
+    "site-planning"
+  ]
 }

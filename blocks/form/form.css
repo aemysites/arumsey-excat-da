@@ -1,0 +1,167 @@
+/*
+ * Form block - contact form styles matched to the source .dynamicformv2 component.
+ * Stacked full-width fields; spacing comes from per-field margins inside a flex
+ * column (margins do not collapse, so 16px + 16px = 32px between fields on mobile,
+ * 20px + 20px = 40px on desktop).
+ */
+.form .form-fields {
+  display: flex;
+  flex-flow: column wrap;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+  color: var(--text-color);
+}
+
+.form .form-field {
+  display: block;
+  width: 100%;
+  margin: 16px 0;
+}
+
+/* labels */
+.form .form-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--text-color);
+}
+
+.form .form-required {
+  margin-left: -2px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  color: var(--interaction-color);
+}
+
+/* text inputs, selects, textareas */
+.form input:not([type='checkbox'], [type='radio']),
+.form select,
+.form textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  height: 66px;
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: #757575;
+  opacity: 1;
+}
+
+.form select {
+  padding: 16px 24px 16px 18px;
+  appearance: none;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADeSURBVHgB7ZRBDoIwEEWnsHHp3gTKLUxkUXsCl95CbwDuvI4nEBPvQUM8gBeAOmNCgkBkSoyrvqQwKe1/maYBwOP5KRutj2ulJMxE4d5UqUN3LmyLVOtMAJxx7FZSXh7GPMEBCq+FuEIQ7KM4hsqYG80HnTXi/RBChrjQpZM23OLebtZHB1VZFlGS0AeFkiW3k0F405zuRZEPBHMkU+EDgYuEEz4q4Ei44YSAL+DNyvGVUW2tNbW12wXW3PBJwZiErh03nAhhgv5xAQ1mOEvQl7iEO0PHhb+CHDyev/IC0NKRV26Yt4UAAAAASUVORK5CYII=') no-repeat calc(100% - 8px) 50% / 16px;
+  cursor: pointer;
+}
+
+.form textarea {
+  height: 138px;
+  resize: vertical;
+}
+
+/* focus: keep the browser focus ring the source relies on */
+.form input:focus-visible,
+.form select:focus-visible,
+.form textarea:focus-visible {
+  outline: auto 1px;
+}
+
+/* checkboxes and radios: native control + inline pink underlined label */
+.form .form-field-checkbox,
+.form .form-field-radio {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 0 12px;
+}
+
+.form input[type='checkbox'],
+.form input[type='radio'] {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: var(--interaction-color);
+  cursor: pointer;
+}
+
+.form .form-field-checkbox .form-label,
+.form .form-field-radio .form-label {
+  margin: 0;
+  font-weight: 400;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.form .form-field-checkbox:has(input[required]) .form-label {
+  color: var(--interaction-color);
+  text-decoration: underline;
+}
+
+.form .form-field-checkbox .form-label a:any-link {
+  color: var(--interaction-color);
+}
+
+/* source hides the required marker on consent checkboxes */
+.form .form-field-checkbox .form-required {
+  display: none;
+}
+
+/* submit */
+.form .form-field-submit {
+  text-align: center;
+}
+
+.form .form-field-submit button,
+.form .form-field-submit button:focus {
+  background-color: var(--button-primary-background);
+  border-color: var(--button-primary-background);
+  color: var(--button-primary-color);
+}
+
+.form .form-field-submit button:hover {
+  background-color: var(--button-primary-background);
+  border-color: var(--button-primary-background);
+  color: var(--button-primary-color);
+  opacity: 0.8;
+}
+
+.form .form-field-submit button:focus-visible {
+  outline: auto 1px;
+}
+
+.form .form-field-submit button[disabled] {
+  background-color: var(--light-grey-color);
+  border-color: var(--light-grey-color);
+  color: var(--label-color);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+@media (width >= 768px) {
+  .form .form-field {
+    margin: 20px 0;
+  }
+
+  .form .form-field-checkbox,
+  .form .form-field-radio {
+    margin: 0 0 22px;
+  }
+}
