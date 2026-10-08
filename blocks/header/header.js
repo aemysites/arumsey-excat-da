@@ -91,8 +91,19 @@ function decorateList(ul, level) {
   [...ul.children].forEach((li) => {
     li.classList.add('nav-item');
     li.setAttribute('role', 'none');
+    // Document Authoring wraps item labels in <p> (and may rewrite '#' to '/'); unwrap them
+    li.querySelectorAll(':scope > p').forEach((p) => p.replaceWith(...p.childNodes));
     const sub = li.querySelector(':scope > ul');
-    const link = li.querySelector(':scope > a');
+    let link = li.querySelector(':scope > a');
+    if (sub && !link) {
+      // plain-text label for a sub-menu
+      const label = [...li.childNodes].find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      if (label) {
+        link = document.createElement('a');
+        link.textContent = label.textContent.trim();
+        label.replaceWith(link);
+      }
+    }
     if (sub && link) {
       const button = document.createElement('button');
       button.type = 'button';
@@ -194,6 +205,9 @@ export default async function decorate(block) {
   // Image paths in the fragment are relative to the fragment itself
   fragment.querySelectorAll('img').forEach((img) => {
     img.src = new URL(img.getAttribute('src'), resp.url).href;
+  });
+  fragment.querySelectorAll('source[srcset]').forEach((source) => {
+    source.srcset = new URL(source.getAttribute('srcset'), resp.url).href;
   });
 
   const [localeSection, brandSection, sectionsSection, toolsSection] = [...fragment.children];
