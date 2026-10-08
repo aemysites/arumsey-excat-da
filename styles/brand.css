@@ -1,0 +1,35 @@
+/* Brand tokens extracted from www.myastrazeneca.ch */
+:root {
+  /* fonts (self-hosted copies of the source fonts, see fonts.css) */
+  --heading-font-family: lexia, lexia-fallback, georgia, serif;
+  --body-font-family: inter, inter-fallback, arial, sans-serif;
+
+  /* colors */
+  --background-color: #fff;
+  --text-color: #3c4242;
+  --title-color: #830051;
+  --interaction-color: #d0006f;
+  --link-color: #3c4242;
+  --link-hover-color: #d0006f;
+  --light-color: #ebefee;
+  --light-grey-color: #ebefee;
+  --dark-color: #3c4242;
+  --label-color: #656969;
+  --border-color: #d8dfde;
+  --core-dark-color: #4f0031;
+  --accent-color: #f0ab00;
+  --table-header-color: #c4cfcd;
+
+  /* buttons */
+  --button-primary-background: #d0006f;
+  --button-primary-color: #fff;
+  --button-secondary-background: transparent;
+  --button-secondary-color: #d0006f;
+  --button-radius: 4px;
+
+  /* layout */
+  --content-max-width: 1180px;
+  --content-inset: 16px;
+  --section-spacing: 40px;
+  --nav-height: 114px;
+}

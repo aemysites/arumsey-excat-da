@@ -1,0 +1,47 @@
+{
+  "variantName": "anchor-nav",
+  "baseBlock": "anchor-nav",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "hasBackgroundImage": false,
+    "hasGrid": false,
+    "imagePattern": "noimg",
+    "structure": "2 CTAs + list"
+  },
+  "contentPattern": {
+    "structure": "horizontal list of in-page anchor links separated by vertical dividers",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "options": [],
+  "memberVariantIds": [
+    "v_d41301689a41"
+  ],
+  "usage": {
+    "pagesUsing": [
+      {
+        "url": "https://www.myastrazeneca.ch/de/startseite/therapiegebiete/ri/copd.html",
+        "instanceId": "2251ae51",
+        "screenshot": ".pages/www_myastrazeneca_ch_de_startseite_therapiegebiete_ri_copd_html--b5fa1f5e/blocks/2251ae51.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/en/startseite/therapiegebiete/ri/copd.html",
+        "instanceId": "29c72514",
+        "screenshot": ".pages/www_myastrazeneca_ch_en_startseite_therapiegebiete_ri_copd_html--03db88aa/blocks/29c72514.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/fr/startseite/therapiegebiete/ri/copd.html",
+        "instanceId": "796c50ea",
+        "screenshot": ".pages/www_myastrazeneca_ch_fr_startseite_therapiegebiete_ri_copd_html--8d31f642/blocks/796c50ea.jpg"
+      },
+      {
+        "url": "https://www.myastrazeneca.ch/it/startseite/therapiegebiete/ri/copd.html",
+        "instanceId": "29f4da2b",
+        "screenshot": ".pages/www_myastrazeneca_ch_it_startseite_therapiegebiete_ri_copd_html--8461eb0b/blocks/29f4da2b.jpg"
+      }
+    ],
+    "reuseCount": 4
+  }
+}

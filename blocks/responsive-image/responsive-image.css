@@ -1,0 +1,79 @@
+/*
+ * Responsive Image
+ * Mirrors the source AEM image component (.cmp-image--desktop / .cmp-image--mobile):
+ * - below 768px the (mobile) image bleeds to the viewport edges, text keeps the inset
+ * - from 768px the (desktop) image fills the 1180px content column
+ * The desktop/mobile swap itself happens via <source media="(width >= 768px)"> in the JS.
+ */
+.responsive-image {
+  display: flex;
+  flex-direction: column;
+}
+
+/* optional heading row: section titles (h3/h4) are centered, page titles (h1/h2) start-aligned */
+.responsive-image .responsive-image-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.responsive-image .responsive-image-header:has(> h1, > h2) {
+  text-align: start;
+}
+
+.responsive-image .responsive-image-header > * {
+  margin: 0;
+}
+
+/* image */
+.responsive-image .responsive-image-media {
+  display: flex;
+  flex-direction: column;
+  margin: 0 calc(-1 * var(--content-inset));
+  line-height: 0;
+}
+
+.responsive-image .responsive-image-media picture {
+  display: block;
+  width: 100%;
+}
+
+.responsive-image .responsive-image-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* optional caption row: figure legend / footnote text (source .text--small) */
+.responsive-image .responsive-image-caption {
+  margin-top: 20px;
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.responsive-image .responsive-image-caption > * {
+  margin: 0;
+}
+
+.responsive-image .responsive-image-caption strong,
+.responsive-image .responsive-image-caption b {
+  font-weight: 700;
+}
+
+@media (width >= 768px) {
+  .responsive-image .responsive-image-header {
+    margin-bottom: 40px;
+  }
+
+  .responsive-image .responsive-image-header:has(> h1, > h2) {
+    margin-bottom: 20px;
+  }
+
+  .responsive-image .responsive-image-media {
+    margin: 0;
+  }
+
+  .responsive-image .responsive-image-caption {
+    margin-top: 16px;
+  }
+}

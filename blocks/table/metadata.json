@@ -1,0 +1,16 @@
+{
+  "variantName": "table",
+  "baseBlock": "table",
+  "canonicalModel": "standalone",
+  "contentPattern": {
+    "structure": "one row per table row, one cell per column; first row is the header",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "options": [
+    {
+      "class": "no-header",
+      "description": "Render every row as a body row"
+    }
+  ]
+}

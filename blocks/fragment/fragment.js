@@ -20,7 +20,10 @@ import {
  */
 export async function loadFragment(path) {
   if (path && path.startsWith('/')) {
-    const resp = await fetch(`${path}.plain.html`);
+    // local preview serves pages under /content; try that location first
+    const local = window.location.pathname.startsWith('/content/') && !path.startsWith('/content/');
+    let resp = local ? await fetch(`/content${path}.plain.html`) : null;
+    if (!resp || !resp.ok) resp = await fetch(`${path}.plain.html`);
     if (resp.ok) {
       const main = document.createElement('main');
       main.innerHTML = await resp.text();

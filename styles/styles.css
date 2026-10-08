@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -11,62 +13,57 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
-
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-line-height: 24px;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
-
-  /* nav height */
-  --nav-height: 64px;
+  /* heading sizes (mobile) */
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 36px;
+  --heading-font-size-l: 26px;
+  --heading-font-size-m: 26px;
+  --heading-font-size-s: 20px;
+  --heading-font-size-xs: 18px;
+  --heading-line-height-xxl: 40px;
+  --heading-line-height-xl: 40px;
+  --heading-line-height-l: 34px;
+  --heading-line-height-m: 34px;
+  --heading-line-height-s: 28px;
+  --heading-line-height-xs: 26px;
 }
 
 /* fallback fonts */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
+  font-family: lexia-fallback;
+  size-adjust: 100%;
+  src: local('Georgia');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
+  font-family: inter-fallback;
+  size-adjust: 107%;
   src: local('Arial');
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
+    --content-inset: 20px;
 
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
+    /* heading sizes (tablet and up) */
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl: 46px;
+    --heading-font-size-l: 36px;
+    --heading-font-size-m: 26px;
+    --heading-font-size-s: 22px;
     --heading-font-size-xs: 18px;
+    --heading-line-height-xxl: 60px;
+    --heading-line-height-xl: 50px;
+    --heading-line-height-l: 40px;
+    --heading-line-height-m: 34px;
+    --heading-line-height-s: 30px;
+    --heading-line-height-xs: 26px;
   }
 }
 
@@ -77,7 +74,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: var(--body-line-height);
 }
 
 body.appear {
@@ -98,26 +95,50 @@ footer .footer[data-block-status="loaded"] {
   visibility: visible;
 }
 
+/* default content typography */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 24px;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 400;
+  color: var(--title-color);
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+  line-height: var(--heading-line-height-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+  line-height: var(--heading-line-height-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+  line-height: var(--heading-line-height-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+  line-height: var(--heading-line-height-xs);
+}
 
 p,
 dl,
@@ -125,8 +146,28 @@ ol,
 ul,
 pre,
 blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.25em;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+ul,
+ol {
+  padding: 4px 0 0 20px;
+}
+
+li {
+  margin: 0;
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+sup,
+sub {
+  font-size: 10px;
+  line-height: 0;
 }
 
 code,
@@ -142,10 +183,6 @@ pre {
   white-space: pre;
 }
 
-main > div {
-  margin: 40px 16px;
-}
-
 input,
 textarea,
 select,
@@ -153,61 +190,76 @@ button {
   font: inherit;
 }
 
-/* links */
+/* links: body-colored and underlined inside text, pink on hover */
 a:any-link {
   color: var(--link-color);
-  text-decoration: none;
+  text-decoration: underline;
   overflow-wrap: break-word;
 }
 
 a:hover {
   color: var(--link-hover-color);
-  text-decoration: underline;
 }
 
 /* buttons */
+main .button-container {
+  margin: 0 0 16px;
+}
+
 a.button:any-link,
 button {
   box-sizing: border-box;
   display: inline-block;
   max-width: 100%;
-  margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  margin: 0;
+  border: 1px solid var(--button-primary-background);
+  border-radius: var(--button-radius);
+  padding: 8px 16px;
   font-family: var(--body-font-family);
+  font-size: 16px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 24px;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background-color: var(--button-primary-background);
+  color: var(--button-primary-color);
   cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  transition: opacity 0.2s;
 }
 
+/* the source fades buttons on hover instead of changing their color */
 a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
+button.button:hover {
+  color: var(--button-primary-color);
+  opacity: 0.8;
+}
+
+a.button:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--title-color);
+  outline-offset: 2px;
 }
 
 button:disabled,
 button:disabled:hover {
   background-color: var(--light-color);
+  border-color: var(--light-color);
+  color: var(--label-color);
   cursor: unset;
 }
 
 a.button.secondary,
 button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+  background-color: var(--button-secondary-background);
+  border: 1px solid var(--button-secondary-color);
+  color: var(--button-secondary-color);
+}
+
+a.button.secondary:hover,
+button.button.secondary:hover {
+  color: var(--button-secondary-color);
 }
 
 main img {
@@ -216,42 +268,82 @@ main img {
   height: auto;
 }
 
-.icon {
+span.icon {
   display: inline-block;
   height: 24px;
   width: 24px;
 }
 
-.icon img {
+span.icon img {
   height: 100%;
   width: 100%;
 }
 
-/* sections */
+/* sections: 1180px content column, 40px between components */
 main > .section {
-  margin: 40px 0;
+  margin: var(--section-spacing) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 24px;
+  box-sizing: content-box;
+  max-width: var(--content-max-width);
+  margin: 0 auto var(--section-spacing);
+  padding: 0 var(--content-inset);
+}
+
+main > .section > div:last-child {
+  margin-bottom: 0;
+}
+
+main > .section > .default-content-wrapper > :last-child {
+  margin-bottom: 0;
 }
 
 main > .section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
-}
-
 /* section metadata */
 main .section.light,
+main .section.light-grey,
 main .section.highlight {
-  background-color: var(--light-color);
+  background-color: var(--light-grey-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--section-spacing) 0;
+}
+
+main .section.dark {
+  background-color: var(--dark-color);
+  color: #fff;
+  margin: 0;
+  padding: var(--section-spacing) 0;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark a:any-link {
+  color: #fff;
+}
+
+/* centered section headings (campaign title bands and article bodies) */
+main .section.centered .default-content-wrapper > :is(h1, h2, h3, h4, h5, h6) {
+  text-align: center;
+}
+
+/* references, abbreviations and approval codes: small print */
+main .section.references .default-content-wrapper {
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  line-height: 20px;
+}
+
+main .section.references .default-content-wrapper :is(p, li) {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+main .section.references .default-content-wrapper :is(p, ul, ol) {
+  margin-bottom: 8px;
 }

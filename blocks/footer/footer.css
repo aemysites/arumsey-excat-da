@@ -1,20 +1,92 @@
+/* footer (mobile first): centered stack */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #fff;
+  border-top: 1px solid rgb(235 239 238);
+  color: rgb(60 66 66);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  padding: 20px 0;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer-inner {
+  box-sizing: border-box;
+  margin: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  text-align: center;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer-brand img {
+  width: 165px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+footer .footer-brand p + p {
+  max-width: 290px;
+  margin: 10px auto 0;
+}
+
+footer .footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+footer .footer li {
+  margin: 0 0 20px;
+  line-height: 20px;
+}
+
+footer .footer-links li:last-child {
+  margin-bottom: 0;
+}
+
+footer .footer a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: rgb(208 0 111);
+  text-decoration: none;
+}
+
+/* desktop: brand column + two link columns, 130px inset */
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer {
+    padding: 40px 0;
+  }
+
+  footer .footer-inner {
+    margin: 0 130px;
+    grid-template-columns: 300px 1fr 1fr;
+    gap: 0;
+    text-align: left;
+  }
+
+  footer .footer-brand img {
+    margin: 0;
+  }
+
+  footer .footer-brand p + p {
+    max-width: none;
+    margin: 16px 0 0;
+  }
+
+  footer .footer li {
+    margin-bottom: 24px;
+    line-height: 24px;
+  }
+
+  footer .footer-links {
+    padding-left: 141px;
   }
 }

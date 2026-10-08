@@ -1,0 +1,60 @@
+/*
+ * Table block
+ * Mirrors the source rich-text tables (<table border="1" cellpadding="1"
+ * cellspacing="0" width="100%">): plain grey 1px outset/inset borders,
+ * no header fill, no striping, 1px cell padding and 40px text indent
+ * (source cells wrap text in <p style="margin-left: 40px">).
+ */
+
+/* source caption paragraph follows the table at 16px (not the 40px component gap) */
+main > .section > .table-wrapper:has(+ .default-content-wrapper > p:first-child) {
+  margin-bottom: 16px;
+}
+
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table table {
+  width: 100%;
+
+  /* source cells carry width="33%" / width="50%": equal-width columns */
+  table-layout: fixed;
+  border: 1px outset rgb(128 128 128);
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: var(--text-color);
+
+  /* source uses word-break: break-word, so narrow columns break inside words */
+  overflow-wrap: anywhere;
+}
+
+.table table th,
+.table table td {
+  padding: 1px 1px 1px 41px;
+  border: 1px inset rgb(128 128 128);
+  font-weight: 400;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* paragraphs inside cells: indent comes from the cell padding */
+.table table th p,
+.table table td p {
+  margin: 0;
+}
+
+/* lists sit 20px from the cell edge (source ul: padding 4px 0 12px 20px) */
+.table table td ul,
+.table table td ol {
+  margin: 0 0 0 -40px;
+  padding: 4px 0 12px 20px;
+}
+
+.table table td li {
+  margin: 0;
+}

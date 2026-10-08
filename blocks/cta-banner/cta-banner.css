@@ -1,0 +1,89 @@
+/*
+ * CTA Banner
+ * default: full-width light-grey band (source: .container--bgColor-supporting-1,
+ *          padding 20px 0), centered heading, text and button(s)
+ * plain:   no band, left-aligned (source: .container--tb-space-md)
+ */
+.cta-banner {
+  padding: 20px 0;
+  background-color: var(--cta-banner-background, var(--light-grey-color));
+
+  /* bleed the band background to the full viewport width without affecting layout */
+  box-shadow: 0 0 0 100vmax var(--cta-banner-background, var(--light-grey-color));
+  clip-path: inset(0 -100vmax);
+}
+
+.cta-banner .cta-banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.cta-banner .cta-banner-content > * {
+  margin: 0;
+}
+
+.cta-banner .cta-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+main .cta-banner .cta-banner-actions .button-container {
+  margin: 0;
+}
+
+/* the band already carries the section background: let it replace the section padding */
+main .section.light-grey > .cta-banner-wrapper:only-child {
+  margin-block: calc(-1 * var(--section-spacing));
+}
+
+/* option: plain -- no band, content left-aligned */
+.cta-banner.plain {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+  clip-path: none;
+}
+
+.cta-banner.plain .cta-banner-content {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cta-banner.plain .cta-banner-actions {
+  justify-content: flex-start;
+}
+
+/* source keeps an empty 24px paragraph between the text and the button */
+.cta-banner.plain:not(.cta-banner-actions-only) .cta-banner-actions {
+  margin-top: 24px;
+}
+
+/* a plain banner with only CTA(s) is centered */
+.cta-banner.plain.cta-banner-actions-only .cta-banner-content {
+  align-items: center;
+}
+
+.cta-banner.plain.cta-banner-actions-only .cta-banner-actions {
+  justify-content: center;
+}
+
+@media (width >= 768px) {
+  .cta-banner .cta-banner-content,
+  .cta-banner .cta-banner-actions {
+    gap: 16px;
+  }
+
+  .cta-banner.plain {
+    padding: 40px 0;
+  }
+
+  /* consecutive plain banners: source spacing is 40px + 40px between them */
+  .cta-banner-wrapper:has(> .cta-banner.plain) + .cta-banner-wrapper > .cta-banner.plain {
+    padding-top: 0;
+  }
+}
