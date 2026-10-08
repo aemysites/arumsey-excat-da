@@ -97,7 +97,8 @@ function decorateList(ul, level) {
     let link = li.querySelector(':scope > a');
     if (sub && !link) {
       // plain-text label for a sub-menu
-      const label = [...li.childNodes].find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      const label = [...li.childNodes]
+        .find((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
       if (label) {
         link = document.createElement('a');
         link.textContent = label.textContent.trim();
